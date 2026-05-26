@@ -1,20 +1,30 @@
 from tabulate import tabulate
 
-def crear_gasto(nombre,precio):
-    return {
-        "nombre": nombre,
-        "precio": precio
-    }
+class Gasto:
 
-def formatear_gastos (lista_de_gastos):
-    tabla = []
+    def __init__(self, nombre, precio):
+        self.nombre = nombre
+        self.precio = precio
 
-    for gasto in lista_de_gastos:
-        tabla.append(
-            [
-                gasto["nombre"],
-                gasto["precio"]
-             ]
+class ListaGastos:
+    
+    def __init__(self):
+        self.gastos = []
+
+    def crear_gasto(self,gasto):
+        self.gastos.append(gasto)
+
+    def formatear_gasto(self):
+
+        tabla = []
+
+        for gasto in self.gastos:
+            tabla.append([
+                gasto.nombre,
+                gasto.precio
+            ])
+
+        return tabulate(
+            tabla,
+            headers=["Nombre","Precio"]
         )
-
-    return tabulate(tabla,headers=["Nombre","Precio"])
